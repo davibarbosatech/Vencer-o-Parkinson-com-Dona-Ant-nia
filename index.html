@@ -2,19 +2,20 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Juntos pela Dona Antônia | Superando o Parkinson</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Variáveis de Cores - Tons Suaves e Acolhedores */
         :root {
-            --primary: #6a4c93; /* Roxo/Lilás (Símbolo do Parkinson) */
-            --secondary: #9d81ba; /* Lavanda suave */
-            --accent: #e07a5f; /* Coral suave para botões (contraste caloroso) */
+            --primary: #6a4c93;
+            --secondary: #9d81ba;
+            --accent: #e07a5f;
             --text-dark: #3d405b;
             --text-light: #f4f1de;
             --bg-light: #ffffff;
-            --bg-warm: #faf9f6; /* Creme suave */
+            --bg-warm: #faf9f6;
+            --success: #2ecc71;
         }
 
         * {
@@ -28,6 +29,10 @@
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--bg-light);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
         }
 
         h1, h2, h3 {
@@ -39,6 +44,7 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         .btn {
@@ -63,21 +69,24 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(106, 76, 147, 0.6), rgba(106, 76, 147, 0.6)), url('hero.png') no-repeat center center/cover;
-            height: 85vh;
+            min-height: 85vh;
+            min-height: 85dvh;
             display: flex;
             align-items: center;
             color: white;
             text-align: center;
+            width: 100%;
         }
 
         .hero h1 {
             color: white;
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .hero-content p {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             margin-bottom: 35px;
             max-width: 800px;
             margin-left: auto;
@@ -87,7 +96,7 @@
 
         /* Seção 1: A História */
         .section-story {
-            padding: 100px 0;
+            padding: 60px 0;
             background-color: white;
         }
 
@@ -102,33 +111,39 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
         .story-image {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    max-width: 100%;
-    object-fit: contain;
-
-    /* Efeito suave e elegante */
-    border-radius: 18px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
         /* Seção 2: Necessidades */
         .section-needs {
-            padding: 100px 0;
+            padding: 60px 0;
             background-color: var(--bg-warm);
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
-        .section-title h2 { font-size: 2.5rem; }
+        .section-title h2 { 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
 
         .cards-container {
             display: grid;
@@ -138,90 +153,261 @@
 
         .card {
             background: white;
-            padding: 40px 30px;
+            padding: 30px 20px;
             border-radius: 20px;
             text-align: center;
             transition: transform 0.3s;
             border: 1px solid #eee;
+            height: 100%;
         }
 
         .card:hover { transform: translateY(-5px); }
 
         .card h3 {
             margin-bottom: 15px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         /* Seção 3: Transparência */
         .section-transparency {
-            padding: 80px 0;
+            padding: 60px 0;
             text-align: center;
             background: white;
         }
 
         .quote {
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             font-style: italic;
             color: var(--secondary);
             max-width: 800px;
             margin: 0 auto 20px;
             line-height: 1.4;
+            padding: 0 15px;
         }
 
         /* Seção 4: Como Ajudar (CTA) */
         .section-cta {
-            padding: 100px 0;
+            padding: 60px 0;
             background: var(--primary);
             color: white;
             text-align: center;
+            width: 100%;
+            margin-top: auto;
         }
 
-        .section-cta h2 { color: white; margin-bottom: 20px; }
+        .section-cta h2 { 
+            color: white; 
+            margin-bottom: 20px;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
 
+        .section-cta p {
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* PIX Box com efeito de copiar */
         .pix-box {
             background: rgba(255,255,255,0.15);
-            padding: 30px;
+            padding: 25px 20px;
             border: 2px dashed rgba(255,255,255,0.5);
             display: inline-block;
-            margin-top: 30px;
+            margin: 30px auto;
             border-radius: 20px;
             backdrop-filter: blur(5px);
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease;
+        }
+
+        .pix-key-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            margin: 15px 0;
+            cursor: pointer;
         }
 
         .pix-key {
             display: block;
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: bold;
-            margin: 10px 0;
             letter-spacing: 1px;
+            word-break: break-all;
+            background: rgba(255,255,255,0.1);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            user-select: all; /* Facilita a seleção em desktop */
+        }
+
+        .pix-key:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .pix-key.copied {
+            background: var(--success);
+            border-color: white;
+            transform: scale(1.02);
+        }
+
+        .copy-feedback {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        .copy-icon {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 0.9em;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .pix-key:hover .copy-icon {
+            opacity: 1;
         }
 
         /* Footer */
         footer {
-            padding: 50px 0;
+            padding: 40px 0;
             background: #2b2d42;
             color: #bdc3c7;
             text-align: center;
+            margin-top: auto;
         }
 
-        /* Ajustes Desktop - Imagem Hero sem cortar rosto */
+        /* Ajustes Desktop */
         @media (min-width: 769px) {
             .hero {
-                background: linear-gradient(rgba(106, 76, 147, 0.6), rgba(106, 76, 147, 0.6)), url('hero.png') no-repeat center top/cover;
-                background-position: center 30%;
-            }
-            
-            .hero {
-                min-height: 85vh;
-                background-size: cover;
+                background: linear-gradient(rgba(106, 76, 147, 0.6), rgba(106, 76, 147, 0.6)), url('hero.png') no-repeat center 30%/cover;
             }
         }
 
-        /* Responsividade */
+        /* Responsividade Mobile */
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; text-align: center; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero { height: auto; padding: 100px 0; }
+            .grid { 
+                grid-template-columns: 1fr; 
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .hero { 
+                min-height: 70vh;
+                min-height: 70dvh;
+                padding: 40px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            .section-story,
+            .section-needs,
+            .section-transparency,
+            .section-cta {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                margin-bottom: 30px;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+
+            .card {
+                padding: 25px 15px;
+            }
+
+            .pix-box {
+                width: 90%;
+                padding: 20px 15px;
+            }
+
+            .pix-key {
+                font-size: 1rem;
+                padding: 12px 15px;
+                word-break: break-word;
+            }
+
+            .section-cta {
+                padding-bottom: 50px;
+            }
+
+            footer {
+                padding: 30px 0;
+            }
+
+            .story-image {
+                max-height: 300px;
+            }
+
+            .copy-feedback {
+                font-size: 0.75rem;
+                white-space: normal;
+                width: max-content;
+                max-width: 200px;
+            }
+        }
+
+        /* Ajuste para telas muito pequenas */
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 15px 30px;
+                font-size: 0.9rem;
+            }
+
+            .pix-key {
+                font-size: 0.9rem;
+                padding: 10px 12px;
+            }
+        }
+
+        /* Suporte para safe area em iPhones */
+        @supports (padding: max(0px)) {
+            .section-cta {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-bottom: max(50px, env(safe-area-inset-bottom));
+            }
+
+            footer {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-bottom: max(30px, env(safe-area-inset-bottom));
+            }
         }
     </style>
 </head>
@@ -238,7 +424,6 @@
     <section class="section-story">
         <div class="container grid">
             <div class="image-container">
-                <!-- ALTERADO: Adicionada classe específica story-image -->
                 <img src="seccion-1.jpg" alt="Dona Antônia em sua sala" class="story-image">
             </div>
             <div>
@@ -276,7 +461,7 @@
     <section class="section-transparency">
         <div class="container">
             <p class="quote">"O amor é o melhor remédio, mas a solidariedade é o que viabiliza a cura da alma."</p>
-            <p>Prestamos contas de cada centavo. O bem-estar da Dona Antônia é um compromisso público e familiar.</p>
+            <p>O bem-estar de Dona Antônia é um compromisso familiar, publico e social.</p>
         </div>
     </section>
 
@@ -286,9 +471,13 @@
             <p>Não existe valor pequeno quando o objetivo é aliviar o peso de uma doença.</p>
             
             <div class="pix-box">
-                <p>Chave PIX para contribuições:</p>
-                <span class="pix-key">urielsouza200126@gmail.com</span>
-                <p style="font-size: 0.9rem; opacity: 0.9;">Titular: Uriel Souza | Instituição: Itaú Unibanco</p>
+                <p>Chave PIX para contribuições <span style="opacity: 0.8;">(clique para copiar)</span>:</p>
+                <div class="pix-key-container" onclick="copiarPix()">
+                    <span class="pix-key" id="pixKey">urielsouza200126@gmail.com</span>
+                    <span class="copy-icon">📋</span>
+                    <span class="copy-feedback" id="copyFeedback">Copiado! ✓</span>
+                </div>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Titular: Davi Pereira Freitas | Instituição: Itaú Unibanco</p>
             </div>
             
             <div style="margin-top: 40px;">
@@ -299,11 +488,46 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Campanha Vencer o Parkinson com Dona Antônia. <br> Criado com amor por seus filhos e netos.</p>
-        </div>
+            <p>&copy; 2025 Campanha Vencer o Parkinson com Dona Antônia. 
     </footer>
 
-</body>
+    <script>
+        function copiarPix() {
+            const pixKey = document.getElementById('pixKey');
+            const feedback = document.getElementById('copyFeedback');
+            const keyText = pixKey.textContent || pixKey.innerText;
+            
+            // Copiar para área de transferência
+            navigator.clipboard.writeText(keyText).then(() => {
+                // Adicionar classe de sucesso
+                pixKey.classList.add('copied');
+                feedback.classList.add('show');
+                
+                // Remover feedback após 2 segundos
+                setTimeout(() => {
+                    pixKey.classList.remove('copied');
+                    feedback.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                // Fallback para navegadores antigos
+                const textarea = document.createElement('textarea');
+                textarea.value = keyText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                // Feedback visual
+                pixKey.classList.add('copied');
+                feedback.classList.add('show');
+                
+                setTimeout(() => {
+                    pixKey.classList.remove('copied');
+                    feedback.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
 
-    <!-- deploy -->
+</body>
 </html>
