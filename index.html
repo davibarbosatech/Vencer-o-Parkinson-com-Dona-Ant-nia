@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juntos pela Dona Antônia | Superando o Parkinson</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de Cores - Tons Suaves e Acolhedores */
+        :root {
+            --primary: #6a4c93; /* Roxo/Lilás (Símbolo do Parkinson) */
+            --secondary: #9d81ba; /* Lavanda suave */
+            --accent: #e07a5f; /* Coral suave para botões (contraste caloroso) */
+            --text-dark: #3d405b;
+            --text-light: #f4f1de;
+            --bg-light: #ffffff;
+            --bg-warm: #faf9f6; /* Creme suave */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(224, 122, 95, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #d6684d;
+            box-shadow: 0 6px 20px rgba(224, 122, 95, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(106, 76, 147, 0.6), rgba(106, 76, 147, 0.6)), url('hero.png') no-repeat center center/cover;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        /* Seção 1: A História */
+        .section-story {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .story-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    max-width: 100%;
+    object-fit: contain;
+
+    /* Efeito suave e elegante */
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+        /* Seção 2: Necessidades */
+        .section-needs {
+            padding: 100px 0;
+            background-color: var(--bg-warm);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 { font-size: 2.5rem; }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Seção 3: Transparência */
+        .section-transparency {
+            padding: 80px 0;
+            text-align: center;
+            background: white;
+        }
+
+        .quote {
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--secondary);
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.4;
+        }
+
+        /* Seção 4: Como Ajudar (CTA) */
+        .section-cta {
+            padding: 100px 0;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .section-cta h2 { color: white; margin-bottom: 20px; }
+
+        .pix-box {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border: 2px dashed rgba(255,255,255,0.5);
+            display: inline-block;
+            margin-top: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .pix-key {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            background: #2b2d42;
+            color: #bdc3c7;
+            text-align: center;
+        }
+
+        /* Ajustes Desktop - Imagem Hero sem cortar rosto */
+        @media (min-width: 769px) {
+            .hero {
+                background: linear-gradient(rgba(106, 76, 147, 0.6), rgba(106, 76, 147, 0.6)), url('hero.png') no-repeat center top/cover;
+                background-position: center 30%;
+            }
+            
+            .hero {
+                min-height: 85vh;
+                background-size: cover;
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero { height: auto; padding: 100px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Mãos que cuidaram, agora pedem carinho.</h1>
+            <p>Dona Antônia enfrenta o Mal de Parkinson com bravura. Nossa missão é proporcionar a ela qualidade de vida, dignidade e o tratamento adequado para controlar os sintomas desta jornada.</p>
+            <a href="#ajudar" class="btn">Apoiar o Tratamento</a>
+        </div>
+    </header>
+
+    <section class="section-story">
+        <div class="container grid">
+            <div class="image-container">
+                <!-- ALTERADO: Adicionada classe específica story-image -->
+                <img src="seccion-1.jpg" alt="Dona Antônia em sua sala" class="story-image">
+            </div>
+            <div>
+                <h2 style="margin-bottom: 25px;">A doçura de Antônia contra o Parkinson</h2>
+                <p>Aos 78 anos, Dona Antônia, nossa eterna mestre dos bolos e dos abraços apertados, recebeu o diagnóstico de Parkinson. A doença trouxe tremores e dificuldades de locomoção, mas não tirou o brilho do seu olhar.</p>
+                <br>
+                <p>O tratamento para retardar o avanço da doença envolve uma rotina multidisciplinar intensa. Para que ela continue caminhando pelo seu jardim e segurando as mãos dos netos, precisamos de uma rede de apoio que sustente os custos médicos mensais.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-needs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossa Corrente de Cuidados</h2>
+                <p>Sua doação ajuda a custear as frentes essenciais do tratamento:</p>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Medicação Específica</h3>
+                    <p>Fármacos essenciais para o controle da dopamina e redução dos tremores involuntários.</p>
+                </div>
+                <div class="card">
+                    <h3>Neurofisioterapia</h3>
+                    <p>Sessões focadas em manter a marcha, o equilíbrio e a independência motora.</p>
+                </div>
+                <div class="card">
+                    <h3>Fonoaudiologia</h3>
+                    <p>Exercícios vitais para preservar a fala e garantir a segurança na deglutição.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-transparency">
+        <div class="container">
+            <p class="quote">"O amor é o melhor remédio, mas a solidariedade é o que viabiliza a cura da alma."</p>
+            <p>Prestamos contas de cada centavo. O bem-estar da Dona Antônia é um compromisso público e familiar.</p>
+        </div>
+    </section>
+
+    <section id="ajudar" class="section-cta">
+        <div class="container">
+            <h2>Como você pode ajudar hoje?</h2>
+            <p>Não existe valor pequeno quando o objetivo é aliviar o peso de uma doença.</p>
+            
+            <div class="pix-box">
+                <p>Chave PIX para contribuições:</p>
+                <span class="pix-key">urielsouza200126@gmail.com</span>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Titular: Uriel Souza | Instituição: Itaú Unibanco</p>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <p>Também aceitamos ajuda com fraldas geriátricas e suplementos. <br> <strong>Entre em contato conosco para combinar a entrega!</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Campanha Vencer o Parkinson com Dona Antônia. <br> Criado com amor por seus filhos e netos.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
