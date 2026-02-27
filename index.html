@@ -218,30 +218,37 @@
             border-radius: 20px;
             backdrop-filter: blur(5px);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             transition: all 0.3s ease;
         }
 
         .pix-key-container {
             position: relative;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             margin: 15px 0;
             cursor: pointer;
+            gap: 8px;
+            flex-wrap: nowrap;
         }
 
         .pix-key {
-            display: block;
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-weight: bold;
             letter-spacing: 1px;
-            word-break: break-all;
+            white-space: nowrap;
             background: rgba(255,255,255,0.1);
-            padding: 15px 20px;
+            padding: 12px 20px;
             border-radius: 12px;
             border: 2px solid transparent;
             transition: all 0.3s ease;
-            user-select: all; /* Facilita a seleção em desktop */
+            user-select: all;
+            display: inline-block;
+            max-width: calc(100% - 50px);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .pix-key:hover {
@@ -270,6 +277,7 @@
             transition: opacity 0.3s ease;
             white-space: nowrap;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            pointer-events: none;
         }
 
         .copy-feedback.show {
@@ -278,13 +286,14 @@
 
         .copy-icon {
             display: inline-block;
-            margin-left: 10px;
-            font-size: 0.9em;
+            font-size: 1.2em;
             opacity: 0.7;
             transition: opacity 0.3s ease;
+            flex-shrink: 0;
+            pointer-events: none;
         }
 
-        .pix-key:hover .copy-icon {
+        .pix-key-container:hover .copy-icon {
             opacity: 1;
         }
 
@@ -348,14 +357,24 @@
             }
 
             .pix-box {
-                width: 90%;
+                width: 95%;
+                max-width: 500px;
                 padding: 20px 15px;
             }
 
+            .pix-key-container {
+                gap: 6px;
+            }
+
             .pix-key {
-                font-size: 1rem;
-                padding: 12px 15px;
-                word-break: break-word;
+                font-size: 0.95rem;
+                padding: 10px 12px;
+                white-space: nowrap;
+                max-width: calc(100% - 40px);
+            }
+
+            .copy-icon {
+                font-size: 1.1em;
             }
 
             .section-cta {
@@ -372,9 +391,9 @@
 
             .copy-feedback {
                 font-size: 0.75rem;
-                white-space: normal;
-                width: max-content;
-                max-width: 200px;
+                white-space: nowrap;
+                width: auto;
+                max-width: none;
             }
         }
 
@@ -390,8 +409,12 @@
             }
 
             .pix-key {
-                font-size: 0.9rem;
-                padding: 10px 12px;
+                font-size: 0.85rem;
+                padding: 8px 10px;
+            }
+
+            .copy-icon {
+                font-size: 1rem;
             }
         }
 
@@ -472,9 +495,9 @@
             
             <div class="pix-box">
                 <p>Chave PIX para contribuições <span style="opacity: 0.8;">(clique para copiar)</span>:</p>
-                <div class="pix-key-container" onclick="copiarPix()">
+                <div class="pix-key-container" onclick="copiarPix(event)">
                     <span class="pix-key" id="pixKey">urielsouza200126@gmail.com</span>
-                  
+                
                     <span class="copy-feedback" id="copyFeedback">Copiado! ✓</span>
                 </div>
                 <p style="font-size: 0.9rem; opacity: 0.9;">Titular: Davi Pereira Freitas | Instituição: Itaú Unibanco</p>
@@ -488,47 +511,63 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Campanha Vencer o Parkinson com Dona Antônia. 
+            <p>&copy; 2025 Campanha Vencer o Parkinson com Dona Antônia.</p>
+        </div>
     </footer>
 
     <script>
-        function copiarPix() {
+        function copiarPix(event) {
+            // Previne qualquer comportamento padrão
+            event.preventDefault();
+            event.stopPropagation();
+            
             const pixKey = document.getElementById('pixKey');
             const feedback = document.getElementById('copyFeedback');
             const keyText = pixKey.textContent || pixKey.innerText;
             
-            // Copiar para área de transferência
-            navigator.clipboard.writeText(keyText).then(() => {
-                // Adicionar classe de sucesso
-                pixKey.classList.add('copied');
-                feedback.classList.add('show');
-                
-                // Remover feedback após 2 segundos
-                setTimeout(() => {
-                    pixKey.classList.remove('copied');
-                    feedback.classList.remove('show');
-                }, 2000);
-            }).catch(err => {
-                // Fallback para navegadores antigos
+            // Verifica se a API de clipboard está disponível
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(keyText).then(() => {
+                    mostrarFeedback(pixKey, feedback);
+                }).catch(err => {
+                    fallbackCopy(keyText, pixKey, feedback);
+                });
+            } else {
+                fallbackCopy(keyText, pixKey, feedback);
+            }
+        }
+        
+        function fallbackCopy(text, pixKey, feedback) {
+            try {
+                // Método alternativo para navegadores mais antigos
                 const textarea = document.createElement('textarea');
-                textarea.value = keyText;
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
                 document.body.appendChild(textarea);
                 textarea.select();
+                textarea.setSelectionRange(0, 99999);
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 
-                // Feedback visual
-                pixKey.classList.add('copied');
-                feedback.classList.add('show');
-                
-                setTimeout(() => {
-                    pixKey.classList.remove('copied');
-                    feedback.classList.remove('show');
-                }, 2000);
-            });
+                mostrarFeedback(pixKey, feedback);
+            } catch (err) {
+                alert('Não foi possível copiar. Selecione a chave manualmente.');
+            }
+        }
+        
+        function mostrarFeedback(pixKey, feedback) {
+            // Adiciona classe de sucesso
+            pixKey.classList.add('copied');
+            feedback.classList.add('show');
+            
+            // Remove feedback após 2 segundos
+            setTimeout(() => {
+                pixKey.classList.remove('copied');
+                feedback.classList.remove('show');
+            }, 2000);
         }
     </script>
 
 </body>
 </html>
-
